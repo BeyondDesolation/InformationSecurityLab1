@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:D.IBlab1"
         xmlns:vm="clr-namespace:D.IBlab1.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        DataContext="">
+        Title="{Binding Title}" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
 
     </Grid>
