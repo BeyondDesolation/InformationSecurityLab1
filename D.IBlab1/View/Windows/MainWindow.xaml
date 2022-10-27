@@ -10,7 +10,23 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Опции">
+                <MenuItem Header="Редактировать профиль"/>
+                <MenuItem Header="Список пользователей"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О рограмме"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="Готово"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <ContentControl Content="{Binding MainContent}"/>
+        </Grid>
+    </DockPanel>
 </Window>

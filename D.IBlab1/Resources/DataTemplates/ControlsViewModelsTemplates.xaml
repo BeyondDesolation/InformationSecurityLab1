@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:D.IBlab1.View.UserControls"
+                    xmlns:vm="clr-namespace:D.IBlab1.ViewModels.UserControlsViewModels">
+    <DataTemplate DataType="{x:Type vm:WelcomeControlViewModel}">
+        <v:WelcomeControl/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserManagementControlViewModel}">
+        <v:UserManagementControl/>
+    </DataTemplate>
+</ResourceDictionary>
