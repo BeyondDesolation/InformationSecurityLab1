@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using D.IBlab1.ViewModels.Base;
 
 namespace D.IBlab1.ViewModels.UserControlsViewModels
 {
-    internal class UserManagementControlViewModel
+    internal class UserManagementControlViewModel : ViewModelBase
     {
     }
 }

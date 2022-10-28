@@ -7,10 +7,10 @@
              xmlns:vm="clr-namespace:D.IBlab1.ViewModels.UserControlsViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
+    <d:UserControl.DataContext>
         <vm:WelcomeControlViewModel/>
-    </UserControl.DataContext>
+    </d:UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Привет"/> 
+        <TextBlock Text="{Binding Path=WelcomeText}"/> 
     </Grid>
 </UserControl>
