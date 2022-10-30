@@ -5,8 +5,11 @@
         /// <summary> Логин пользователя, уникальный </summary>
         public string Login { get; set; } = string.Empty;
 
-        /// <summary> Пароль </summary>
+        /// <summary> Пароль (захеширован) </summary>
         public string Password { get; set; } = string.Empty;
+
+        /// <summary> Соль хеша </summary>
+        public string Salt { get; set; } = string.Empty;
 
         /// <summary> Роль. 0 - админ, 1 - обычный пользователь </summary>
         public int Role { get; set; } = 1;

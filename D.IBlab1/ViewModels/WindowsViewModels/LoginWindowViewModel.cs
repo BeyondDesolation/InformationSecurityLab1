@@ -1,6 +1,7 @@
 ﻿using D.IBlab1.Data.Storages;
 using D.IBlab1.Infrastructure.Commands;
 using D.IBlab1.Models;
+using D.IBlab1.Services;
 using D.IBlab1.ViewModels.Base;
 using System;
 using System.Linq;
@@ -59,7 +60,10 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
                 if (passwordBoxes[0].Password.Equals(passwordBoxes[1].Password))
                 {
                     // TODO: Захешировать
-                    user.Password = passwordBoxes[0].Password;
+                    var saltPass = PasswordHelperService.HashPassword(passwordBoxes[0].Password);
+
+                    user.Password = saltPass.hashedPass;
+                    user.Salt = saltPass.salt;
 
                     if (_userStorage.Edit(user, user.Login))
                     {
@@ -76,7 +80,7 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
                     ShowWarning("Пароли не совпадают", "Ошибка");
                 }
             }
-            else if (passwordBoxes[0].Password.Equals(user.Password)) // TODO: Хеширование
+            else if (PasswordHelperService.VerifyPassword(user.Password, user.Salt, passwordBoxes[0].Password))
             {
                 OpenMainWindow(user);
             }
