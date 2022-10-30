@@ -1,4 +1,5 @@
 ﻿using D.IBlab1.Data.Storages;
+using D.IBlab1.Models;
 using D.IBlab1.ViewModels.Base;
 using D.IBlab1.ViewModels.UserControlsViewModels;
 
@@ -9,6 +10,11 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
         private readonly MemoryUserStorage _userStorage; 
 
         #region Свойства
+
+        /// <summary> Текущий пользователь </summary>
+        public User CurrentUser { private get; set; }
+
+
         private string _title = "Главное окно";
         /// <summary>Заголовок окна </summary>
         public string Title

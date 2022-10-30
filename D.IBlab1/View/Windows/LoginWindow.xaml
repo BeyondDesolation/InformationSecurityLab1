@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D.IBlab1.View.Windows"
         xmlns:vm="clr-namespace:D.IBlab1.ViewModels.WindowsViewModels"
-        mc:Ignorable="d"
+        xmlns:c="clr-namespace:D.IBlab1.Infrastructure.Converters"
+        mc:Ignorable="d" Loaded="Window_Loaded"
         Title="LoginWindow" Height="320" Width="360"
         FontSize="14">
     <d:Window.DataContext>
@@ -24,6 +25,7 @@
             <Setter Property="FontSize" Value="16"/>
         </Style>
         <BooleanToVisibilityConverter x:Key="btvConverter"/>
+        <c:ObjectsToArrayConverter x:Key="otaConverter"/>
     </Window.Resources>
     <DockPanel Margin="8">
         <StackPanel DockPanel.Dock="Top">
@@ -43,9 +45,9 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Повторите пароль"
                             Visibility="{Binding IsFirstLogin, Converter={StaticResource btvConverter}}"/>
 
-                <TextBox Grid.Row="0" Grid.Column="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1"/>
-                <TextBox Grid.Row="2" Grid.Column="1" 
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserName}"/>
+                <PasswordBox x:Name="password1" Grid.Row="1" Grid.Column="1"/>
+                <PasswordBox x:Name="password2" Grid.Row="2" Grid.Column="1" 
                           Visibility="{Binding IsFirstLogin, Converter={StaticResource btvConverter}}"/>
             </Grid>
             <TextBlock Margin="0 8" Text="*Первый вход. Повторите пароль для подтверждения*"
@@ -53,7 +55,14 @@
                        Visibility="{Binding IsFirstLogin, Converter={StaticResource btvConverter}}"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button Content="Вход" Command="{Binding LoginCommand}" Background="{StaticResource MainColor}"/>
+            <Button Content="Вход" Command="{Binding LoginCommand}" Background="{StaticResource MainColor}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource otaConverter}">
+                        <Binding ElementName="password1"/>
+                        <Binding ElementName="password2"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
             <Button Content="Выход" Command="{Binding ExitCommand}"/>
         </StackPanel>
         <Label/>
