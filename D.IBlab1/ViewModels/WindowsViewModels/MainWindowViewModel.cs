@@ -1,10 +1,13 @@
-﻿using D.IBlab1.ViewModels.Base;
+﻿using D.IBlab1.Data.Storages;
+using D.IBlab1.ViewModels.Base;
 using D.IBlab1.ViewModels.UserControlsViewModels;
 
 namespace D.IBlab1.ViewModels.WindowsViewModels
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        private readonly MemoryUserStorage _userStorage; 
+
         #region Свойства
         private string _title = "Главное окно";
         /// <summary>Заголовок окна </summary>
@@ -27,8 +30,9 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(MemoryUserStorage userStorage)
         {
+            _userStorage = userStorage;
             _mainContent = new WelcomeControlViewModel();
         }
     }
