@@ -17,7 +17,7 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
         public Action? CloseWindowAction;
         
-        private string _userName = "";
+        private string _userName = "admin";
         /// <summary> Логин пользователя </summary>
         public string UserName
         {
@@ -59,7 +59,6 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
             {
                 if (passwordBoxes[0].Password.Equals(passwordBoxes[1].Password))
                 {
-                    // TODO: Захешировать
                     var saltPass = PasswordHelperService.HashPassword(passwordBoxes[0].Password);
 
                     user.Password = saltPass.hashedPass;

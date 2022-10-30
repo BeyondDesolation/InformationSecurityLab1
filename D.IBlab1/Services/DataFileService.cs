@@ -45,7 +45,7 @@ namespace D.IBlab1.Services
                 des1.Key = keyHash;
                 var encrypted = des1.EncryptCbc(dataArray, IV);
 
-                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
                 {
                     fs.Write(IV, 0, IV.Length);
                     fs.Write(encrypted, 0, encrypted.Length);

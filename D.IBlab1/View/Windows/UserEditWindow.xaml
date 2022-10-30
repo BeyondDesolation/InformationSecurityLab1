@@ -1,0 +1,21 @@
+﻿<Window x:Class="D.IBlab1.View.Windows.UserEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:D.IBlab1.View.Windows"
+        mc:Ignorable="d"
+        Title="UserEditWindow" Height="200" Width="320" FontSize="14">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Редактирование учетной записи" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+            <TextBlock Text="Имя пользователя" Margin="4"/>
+            <TextBox x:Name="tbName" Margin="4 0"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button x:Name="bOk" Click="bOk_Click" Content="Ок" Margin="4 4 4 0" Padding="4" Background="{StaticResource MainColor}"/>
+            <Button x:Name="bCancel" Click="bCancel_Click" Content="Отмена" Padding="4" Margin="4"/>
+        </StackPanel>
+        <Label/>
+    </DockPanel>
+</Window>

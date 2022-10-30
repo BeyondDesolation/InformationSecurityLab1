@@ -10,11 +10,16 @@
     <d:Window.DataContext>
         <vm:MainWindowViewModel/>
     </d:Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="btvConverter"/>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Опции">
                 <MenuItem Header="Редактировать профиль"/>
-                <MenuItem Header="Список пользователей"/>
+                <MenuItem Header="Список пользователей" 
+                          Visibility="{Binding IsCurrentUserAdmin, Converter={StaticResource btvConverter}}"
+                          Command="{Binding OpenUserManagmentCommand}"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="О рограмме"/>

@@ -11,6 +11,31 @@
         <vm:UserManagementControlViewModel/>
     </d:UserControl.DataContext>
     <Grid>
-        <TextBlock Text="User Managment"/>
+        <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" CanUserAddRows="False"
+                  AutoGenerateColumns="False" GridLinesVisibility="Vertical" VerticalGridLinesBrush="DarkGray">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="{StaticResource MainColor}"/>
+                    <Setter Property="BorderThickness" Value="1 1 0 1"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                <DataGridTextColumn Header="Блокировка" Binding="{Binding IsBlocked}"/>
+                <DataGridTextColumn Header="Ограничение на пароли" Binding="{Binding PasswordRestriction}"/>
+                <DataGridTextColumn Header="Пароль установлен" Binding="{Binding Password}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить пользователя" Command="{Binding AddUserCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="Блокировать/разблокировать" Command="{Binding EditUserIsBlockCommand}"/>
+                    <MenuItem Header="Включить/выключить ограничение на пароль" Command="{Binding EditUserPasswordRestrictionCommand}"/>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteUserCommand}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </UserControl>
