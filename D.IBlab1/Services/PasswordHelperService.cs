@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace D.IBlab1.Services
 {
     internal static class PasswordHelperService
     {
+        public static bool IsValidPassword(string password)
+        {
+            Regex regex = new Regex(@"(.*[a-zA-Z]+.*[\+\-\*\=\%\^\(\)\/]+.*)|(.*[\+\-\*\=\%\^\(\)\/]+.*[a-zA-Z]+.*)");
+            return regex.IsMatch(password);
+        }
         public static (string hashedPass, string salt) HashPassword(string password)
         {          
             var saltByteArray = RandomNumberGenerator.GetBytes(16);

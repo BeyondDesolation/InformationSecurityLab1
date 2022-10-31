@@ -17,8 +17,10 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
         /// <summary> Текущий пользователь </summary>
         public User? CurrentUser { private get; set; }
-
         public bool IsCurrentUserAdmin => CurrentUser?.Role == 0;
+
+        /// <summary> Удоволетворяет ли пароль текущего пользователя ограничениям </summary>
+        public bool IsPasswordValid { private get; set; } = true;
 
 
         private string _title = "Главное окно";
@@ -84,6 +86,20 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
         /// <summary> Пустой конструктор для дизайнера </summary>
         public MainWindowViewModel() : this(new MemoryUserStorage()) { }
 
+        /// <summary> Метод, вызываемый из Code behind окна при загрузке </summary>
+        public void OnWindowLoaded()
+        {
+            if (IsPasswordValid)
+                return;
+
+            var dialogResult = MessageBox.Show(
+                "Пароль не удоволетворяет ограничениям, сменить пароль?", "Предуреждение",
+                MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+            if (dialogResult == MessageBoxResult.OK)
+                OnChangePasswordCommandExecuted(null);
+            
+        }
         private void ShowInfo(string message, string caption = "Успех")
         {
             MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Information);

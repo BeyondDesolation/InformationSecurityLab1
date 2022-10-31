@@ -62,6 +62,11 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
             {
                 if (passwordBoxes[0].Password.Equals(passwordBoxes[1].Password))
                 {
+                    if(user.PasswordRestriction && PasswordHelperService.IsValidPassword(passwordBoxes[0].Password) == false)
+                    {
+                        ShowWarning("Пароль должен содержать латинские буквы и знаки арифметических операций (+, -, *, /, =, (, ), %, ^)");
+                        return;
+                    }
                     var saltPass = PasswordHelperService.HashPassword(passwordBoxes[0].Password);
 
                     user.Password = saltPass.hashedPass;
@@ -70,7 +75,7 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
                     if (_userStorage.Edit(user, user.Login))
                     {
                         ShowInfo("Пароль успешно применен", "Инфо");
-                        OpenMainWindow(user);
+                        OpenMainWindow(user, true);
                     }
                     else
                     {
@@ -84,7 +89,10 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
             }
             else if (PasswordHelperService.VerifyPassword(user.Password, user.Salt, passwordBoxes[0].Password))
             {
-                OpenMainWindow(user);
+                var isPassworValid = user.PasswordRestriction == false ||
+                    PasswordHelperService.IsValidPassword(passwordBoxes[0].Password);
+
+                OpenMainWindow(user, isPassworValid);
             }
             else
             {
@@ -112,19 +120,20 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
         /// <summary> Пустой конструктор для дизайнера </summary>
         public LoginWindowViewModel() : this(null, new MemoryUserStorage()) { }
 
-        private void ShowWarning(string message, string caption)
+        private void ShowWarning(string message, string caption = "Предупреждение")
         {
             MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void ShowInfo(string message, string caption)
+        private void ShowInfo(string message, string caption = "Ифно")
         {
             MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void OpenMainWindow(User currentUser)
+        private void OpenMainWindow(User currentUser, bool isPasswordValid)
         {
             _mainWindowViewModel.CurrentUser = currentUser;
+            _mainWindowViewModel.IsPasswordValid = isPasswordValid;
 
             var mainWindow = new MainWindow
             {

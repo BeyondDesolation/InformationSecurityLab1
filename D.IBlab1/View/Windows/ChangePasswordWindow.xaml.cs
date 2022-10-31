@@ -26,6 +26,13 @@ namespace D.IBlab1.View.Windows
                 MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (User.PasswordRestriction && PasswordHelperService.IsValidPassword(pbNewPassword1.Password) == false)
+            {
+                MessageBox.Show(
+                    "Пароль должен содержать латинские буквы и знаки арифметических операций (+, -, *, /, =, (, ), %, ^)",
+                    "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var newSaltandPass = PasswordHelperService.HashPassword(pbNewPassword1.Password);
 
             User.Salt = newSaltandPass.salt;
