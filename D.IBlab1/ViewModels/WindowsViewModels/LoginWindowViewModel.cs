@@ -35,6 +35,9 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
         /// <summary> Комманда запроса на вход </summary>
         public LambdaCommand LoginCommand { get; }
+
+        // При трехкратном вводе неправильного пароля программа должна завершаться
+        private int loginAttemtsCount = 0;
         private bool CanLoginCommandExecute(object p) => true;
         private void OnLoginCommandExecuted(object p) 
         {
@@ -86,6 +89,11 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
             else
             {
                 ShowWarning("Неверный пароль", "Ошибка");
+                loginAttemtsCount++;
+                if(loginAttemtsCount == 3)
+                {
+                    App.Current.Shutdown();
+                }
             }
         }
 
