@@ -45,11 +45,16 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
             if (user == null)
             {
-                ShowWarning("Пользователь не найден", "Предупреждение");
+                ShowWarning("Пользователь не найден");
                 IsFirstLogin = false;
                 return;
             }
-
+            if (user.IsBlocked)
+            {
+                ShowWarning("Учетная запись заблокирована");
+                App.Current.Shutdown();
+                return;
+            }
             if (string.IsNullOrEmpty(user.Password) && IsFirstLogin == false)
             {
                 IsFirstLogin = true;
@@ -74,7 +79,7 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
                     if (_userStorage.Edit(user, user.Login))
                     {
-                        ShowInfo("Пароль успешно применен", "Инфо");
+                        ShowInfo("Пароль успешно применен");
                         OpenMainWindow(user, true);
                     }
                     else
