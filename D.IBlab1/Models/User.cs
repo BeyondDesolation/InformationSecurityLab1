@@ -1,6 +1,6 @@
 ﻿namespace D.IBlab1.Models
 {
-    internal class User
+    public class User
     {
         /// <summary> Логин пользователя, уникальный </summary>
         public string Login { get; set; } = string.Empty;

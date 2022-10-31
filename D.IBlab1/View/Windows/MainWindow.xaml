@@ -16,7 +16,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Опции">
-                <MenuItem Header="Редактировать профиль"/>
+                <MenuItem Header="Сменить пароль" Command="{Binding ChangePasswordCommand}"/>
                 <MenuItem Header="Список пользователей" 
                           Visibility="{Binding IsCurrentUserAdmin, Converter={StaticResource btvConverter}}"
                           Command="{Binding OpenUserManagmentCommand}"/>
