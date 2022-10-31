@@ -71,6 +71,8 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
             }
         }
 
+        /// <summary> Команда, открывающая окно с описанием программы /// </summary>
+        public LambdaCommand OpenProgramInfoWindowCommand { get; }
         #endregion
 
         public MainWindowViewModel(MemoryUserStorage userStorage)
@@ -81,6 +83,7 @@ namespace D.IBlab1.ViewModels.WindowsViewModels
 
             OpenUserManagmentCommand = new LambdaCommand(p => MainContent = _userManagementControlViewModel, p => IsCurrentUserAdmin);
             ChangePasswordCommand = new LambdaCommand(OnChangePasswordCommandExecuted, CanChangePasswordCommandExecute);
+            OpenProgramInfoWindowCommand = new LambdaCommand(p => new ProgramInfoWindow().Show());
         }
 
         /// <summary> Пустой конструктор для дизайнера </summary>

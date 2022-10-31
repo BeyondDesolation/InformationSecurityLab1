@@ -22,7 +22,7 @@
                           Command="{Binding OpenUserManagmentCommand}"/>
             </MenuItem>
             <MenuItem Header="Справка">
-                <MenuItem Header="О рограмме"/>
+                <MenuItem Header="О рограмме" Command="{Binding OpenProgramInfoWindowCommand}"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
